@@ -1,0 +1,101 @@
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+						http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.com.cruz.jamal</groupId>
+	<artifactId>jamal.build</artifactId>
+	<version>1.0.0.0</version>
+	<packaging>pom</packaging>
+	<name>br.com.cruz.jamal.build.pom</name>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<relative.path>../jamal.build</relative.path>
+		<!-- version -->
+		<java.version>1.8</java.version>
+		<maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
+		<junit.version>4.11</junit.version>
+		<lombok.version>1.14.8</lombok.version>
+		<json.version>20141113</json.version>
+		<commons.lang.version>3.3.2</commons.lang.version>
+	</properties>
+	<modules>
+		<module>../jamal.common</module>
+	</modules>
+	<build>
+		<plugins>
+			<!-- MAVEN COMPILER -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencyManagement>
+		<dependencies>
+			<!-- JAMAL -->
+			<dependency>
+				<groupId>br.com.cruz.jamal</groupId>
+				<artifactId>jamal.common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- JUNIT -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+			</dependency>
+			<!-- LOMBOK -->
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+			</dependency>
+			<!-- JSON -->
+			<dependency>
+				<groupId>org.json</groupId>
+				<artifactId>json</artifactId>
+				<version>${json.version}</version>
+			</dependency>
+			<!-- COMMONS LANG -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons.lang.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<dependencies>
+		<!-- JUNIT -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+			<optional>true</optional>
+		</dependency>
+		<!-- LOMBOK -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!-- JSON -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!-- COMMONS LANG -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
+</project>
