@@ -7,11 +7,12 @@ import java.util.List;
 import lombok.NoArgsConstructor;
 import br.com.cruz.jamal.common.exception.JamalException;
 import br.com.cruz.jamal.common.exception.UnableToCompleteOperationException;
+import br.com.cruz.jamal.common.helper.CollectionHelper;
 import br.com.cruz.jamal.common.helper.JSONHelper;
 import br.com.cruz.jamal.common.helper.ReflectionHelper;
 
 @NoArgsConstructor
-public class JamalTO implements Serializable {
+public class JamalTO<T extends JamalTO<T>> implements Serializable, Cloneable {
 	
 	private static final long serialVersionUID = -6062467496837761026L;
 	
@@ -62,7 +63,17 @@ public class JamalTO implements Serializable {
 	@Override
 	public String toString() {
 		try {
-			return JSONHelper.toJSONString(this);
+			return this.toString(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return this.getClass().toString();
+	}
+	
+	public String toString(String fieldName, String... fieldNameArray) {
+		try {
+			List<String> fieldNameList = CollectionHelper.newArrayList(fieldName, fieldNameArray);
+			return JSONHelper.toJSONString(this, fieldNameList.toArray(new String[]{}));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -100,4 +111,39 @@ public class JamalTO implements Serializable {
 		}
 		return super.hashCode();
 	}
+	
+	
+	// clone
+	
+	@Override
+	public T clone() throws CloneNotSupportedException {
+		try {
+			return this.clone(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public T clone(String fieldName, String... fieldNameArray) throws CloneNotSupportedException {
+		try {
+			return (T) JamalTO.load(this.toString(fieldName, fieldNameArray), this.getClass());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	// load
+	
+	public static <T> T load(String json, Class<T> clazz) throws JamalException {
+		try {
+			return JSONHelper.toObject(json, clazz);
+		} catch (Exception e) {
+			throw new UnableToCompleteOperationException("load", e);
+		}
+	}
+		
 }

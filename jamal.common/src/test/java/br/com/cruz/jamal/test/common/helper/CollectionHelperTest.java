@@ -55,4 +55,9 @@ public class CollectionHelperTest extends JamalTest {
 		Assert.assertFalse("O array não deve ser vazio!", CollectionHelper.isNullOrEmpty(array));
 		
 	}
+
+	@Test
+	public void newArrayListTest() {
+		// TODO: Teste - CollectionHelperTest.newArrayListTest()
+	}
 }
