@@ -1,6 +1,11 @@
 package br.com.cruz.jamal.common.helper;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
+import br.com.cruz.jamal.common.exception.JamalException;
+import br.com.cruz.jamal.common.exception.UnableToCompleteOperationException;
 
 public class CollectionHelper extends JamalHelper {
 
@@ -34,5 +39,28 @@ public class CollectionHelper extends JamalHelper {
 		}
 		
 		return true;
+	}
+
+	@SafeVarargs
+	public static final <T> List<T> newArrayList(T item, T... itemArray) throws JamalException {
+		
+		List<T> itemList = new ArrayList<T>();
+		
+		try {
+			if (item != null) {
+				itemList.add(item);
+			}
+			if (!CollectionHelper.isNullOrEmpty(itemArray)) {
+				for (T itemAux : itemArray) {
+					if (item != null) {
+						itemList.add(itemAux);
+					}
+				}
+			}
+		} catch (Exception e) {
+			throw new UnableToCompleteOperationException("newArrayList", e);
+		}
+		
+		return itemList;
 	}
 }

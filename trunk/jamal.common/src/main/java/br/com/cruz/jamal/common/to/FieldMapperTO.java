@@ -11,7 +11,7 @@ import br.com.cruz.jamal.common.exception.JamalException;
 import br.com.cruz.jamal.common.exception.UnableToCompleteOperationException;
 
 
-public class FieldMapperTO extends JamalTO {
+public class FieldMapperTO extends JamalTO<FieldMapperTO> {
 
 	private static final long serialVersionUID = -4619749426287104063L;
 	

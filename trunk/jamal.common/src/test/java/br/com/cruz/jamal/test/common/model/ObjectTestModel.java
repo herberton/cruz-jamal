@@ -81,17 +81,23 @@ public class ObjectTestModel<T> extends JamalTestModel {
 		object.setArrayComplexTypeField(new Object[]{object, object, object, object, object, "teste 6", "teste 7", "teste 8", "teste 9", "teste 10"});
 		object.setArrayGenericTypeField(new Calendar[]{Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance()});
 		
+		ObjectTestModel<ObjectTestModel<Calendar>> item = new ObjectTestModel<ObjectTestModel<Calendar>>();
+		item.setPrimitiveTypeField(object.getPrimitiveTypeField());
+		item.setComplexTypeField(object.getComplexTypeField());
+		item.setGenericTypeField(object);
+		item.setArrayPrimitiveTypeField(object.getArrayPrimitiveTypeField());
+		item.setArrayComplexTypeField(object.getArrayComplexTypeField());
+		item.setArrayGenericTypeField(null);
+		item.setListComplexTypeField(object.getListComplexTypeField());
+		item.setGenericTypeField(null);
+		
 		object.setListComplexTypeField(new ArrayList<Object>());
 		object.getListComplexTypeField().add("teste 1");
 		object.getListComplexTypeField().add("teste 2");
-		object.getListComplexTypeField().add("teste 3");
-		object.getListComplexTypeField().add("teste 4");
-		object.getListComplexTypeField().add("teste 5");
 		object.getListComplexTypeField().add(object);
 		object.getListComplexTypeField().add(object);
-		object.getListComplexTypeField().add(object);
-		object.getListComplexTypeField().add(object);
-		object.getListComplexTypeField().add(object);
+		object.getListComplexTypeField().add(item);
+		object.getListComplexTypeField().add(item);
 		
 		object.setListGenericTypeField(new ArrayList<Calendar>());
 		object.getListGenericTypeField().add(Calendar.getInstance());
