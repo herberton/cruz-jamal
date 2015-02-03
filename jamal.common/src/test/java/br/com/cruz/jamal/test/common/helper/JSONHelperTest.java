@@ -2,12 +2,11 @@ package br.com.cruz.jamal.test.common.helper;
 
 import java.util.Calendar;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-import br.com.cruz.jamal.common.exception.JamalException;
 import br.com.cruz.jamal.common.helper.JSONHelper;
 import br.com.cruz.jamal.common.helper.JamalHelper;
-import br.com.cruz.jamal.test.common.model.ObjectTestModel;
 
 public class JSONHelperTest extends JamalHelper {
 	
@@ -17,15 +16,35 @@ public class JSONHelperTest extends JamalHelper {
 	// toJSONStringTest
 	
 	@Test
-	public void toJSONStringTest() throws JamalException {
-		// testar parametro1.parametro2.etc
-		System.out.println(JSONHelper.toJSONString("teste"));
-		System.out.println(JSONHelper.toJSONString(1));
-		System.out.println(JSONHelper.toJSONString(new Integer(1)));
-		System.out.println(JSONHelper.toJSONString(Calendar.getInstance()));
-		System.out.println(JSONHelper.toJSONString(ObjectTestModel.create()));
-		System.out.println(JSONHelper.toJSONString(ObjectTestModel.createList()));
-		// TODO: Teste - JSONHelperTest.toJSONStringTest()
+	public void toJSONStringTest() {
+	
+		String json = null;
+		
+		try {
+			
+			json = JSONHelper.toJSONString("teste");
+			Assert.assertTrue("O json não deve ser nulo!", json != null);
+			Assert.assertTrue("Os valores devem ser iguais!", json.equals("\"teste\""));
+			
+			json = JSONHelper.toJSONString(1);
+			Assert.assertTrue("O json não deve ser nulo!", json != null);
+			Assert.assertTrue("Os valores devem ser iguais!", json.equals("1"));
+			
+			
+			json = JSONHelper.toJSONString(new Integer(1));
+			Assert.assertTrue("O json não deve ser nulo!", json != null);
+			Assert.assertTrue("Os valores devem ser iguais!", json.equals(new Integer(1).toString()));
+			
+			Calendar calendar = Calendar.getInstance();
+			json = JSONHelper.toJSONString(calendar);
+			Assert.assertTrue("O json não deve ser nulo!", json != null);
+			Assert.assertTrue("Os valores devem ser iguais!", json.equals(new Long(calendar.getTimeInMillis()).toString()));
+
+			// TODO: Testar com ObjectTestModel
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
